@@ -18,6 +18,10 @@ private:
 	ci::gl::VertBatchRef vertexArray;
 	ci::gl::FboRef frameBuffer;
 
+	void setupFramebuffer();
+
+	void drawVertexarray();
+	void drawFramebuffer();
 
 	vec2 dejong(vec2 point);
 };

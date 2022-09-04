@@ -9,14 +9,9 @@ DeJong::DeJong(float a, float b, float c, float d, int const size)
 	this->d = d;
 
 
-	vertexArray = ci::gl::VertBatch::create(GL_POINTS);
-	gl::Fbo::Format hdrFormat;
-	hdrFormat.setSamples(4);
-	frameBuffer = ci::gl::Fbo::create(size, size, hdrFormat);
-	frameBuffer->bindFramebuffer();
-	gl::clear(ColorA(0.0, 0.0, 0.0, 0.0));
-	frameBuffer->unbindFramebuffer();
 	point = vec2(0, 0);
+	vertexArray = ci::gl::VertBatch::create(GL_POINTS);
+	setupFramebuffer();
 }
 
 void DeJong::update()
@@ -31,19 +26,35 @@ void DeJong::update()
 
 void DeJong::draw()
 {
-	{
-		frameBuffer->bindFramebuffer();
-		auto blending = gl::ScopedBlend(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-		auto scopedMatrix = gl::ScopedMatrices();
-		gl::translate(size / 2, size / 2);
-		vertexArray->draw();
-		frameBuffer->unbindFramebuffer();
-	}
-	{
-		gl::clear();
-		auto blending = gl::ScopedBlend(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-		gl::draw(frameBuffer->getColorTexture());
-	}
+	drawVertexarray();
+	drawFramebuffer();
+}
+
+void DeJong::setupFramebuffer()
+{
+	gl::Fbo::Format hdrFormat;
+	hdrFormat.setSamples(4);
+	frameBuffer = ci::gl::Fbo::create(size, size, hdrFormat);
+	frameBuffer->bindFramebuffer();
+	gl::clear(ColorA(0.0, 0.0, 0.0, 0.0));
+	frameBuffer->unbindFramebuffer();
+}
+
+void DeJong::drawVertexarray()
+{
+	frameBuffer->bindFramebuffer();
+	auto blending = gl::ScopedBlend(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	auto scopedMatrix = gl::ScopedMatrices();
+	gl::translate(size / 2, size / 2);
+	vertexArray->draw();
+	frameBuffer->unbindFramebuffer();
+}
+
+void DeJong::drawFramebuffer()
+{
+	gl::clear();
+	auto blending = gl::ScopedBlend(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	gl::draw(frameBuffer->getColorTexture());
 }
 
 vec2 DeJong::dejong(vec2 point)
