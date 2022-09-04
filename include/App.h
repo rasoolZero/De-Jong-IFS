@@ -3,6 +3,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "DeJong.h"
 
 using namespace ci;
 
@@ -13,13 +14,11 @@ public:
 	void update() override;
 	void draw() override;
 private:
-	vec2 point;
-	float a, b, c, d;
 
-	ci::gl::VertBatchRef vertexArray;
-	ci::gl::FboRef frameBuffer;
+	DeJong dj;
+
+	float a, b, c, d;
 	int const size = 512;
 
-	vec2 dejong(vec2 point);
 };
 
