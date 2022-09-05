@@ -17,7 +17,7 @@ DeJong::DeJong(float a, float b, float c, float d, int const size)
 void DeJong::update()
 {
 	vertexArray->clear();
-	for (int i = 0; i < 500; i++) {
+	for (int i = 0; i < 5000; i++) {
 		point = dejong(point);
 		vertexArray->color(0.9, 0.9, 0.9, 0.2);
 		vertexArray->vertex(vec2(point.x * size / 4, point.y * size / 4));

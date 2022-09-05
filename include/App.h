@@ -4,6 +4,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "DeJong.h"
+#include "cinder/Timer.h"
 
 using namespace ci;
 
@@ -20,5 +21,12 @@ private:
 	float a, b, c, d;
 	int const size = 512;
 
+	Timer timer;
+	size_t framesPassed = 0;
+	int fps;
+	std::string frameCounterString;
+
+
+	void updateFPS();
 };
 
