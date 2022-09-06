@@ -1,12 +1,14 @@
 #include "DeJong.h"
 
-DeJong::DeJong(float a, float b, float c, float d, int const size)
+DeJong::DeJong(float a, float b, float c, float d, int const size, int const iterationsPerFrame,ci::ColorA color)
 	: size(size)
 {
 	this->a = a;
 	this->b = b;
 	this->c = c;
 	this->d = d;
+	this->iterationsPerFrame = iterationsPerFrame;
+	this->color = color;
 
 
 	point = vec2(0, 0);
@@ -17,9 +19,9 @@ DeJong::DeJong(float a, float b, float c, float d, int const size)
 void DeJong::update()
 {
 	vertexArray->clear();
-	for (int i = 0; i < 5000; i++) {
+	for (int i = 0; i < iterationsPerFrame; i++) {
 		point = dejong(point);
-		vertexArray->color(0.9, 0.9, 0.9, 0.2);
+		vertexArray->color(color);
 		vertexArray->vertex(vec2(point.x * size / 4, point.y * size / 4));
 	}
 }
