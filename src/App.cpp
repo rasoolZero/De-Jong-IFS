@@ -8,11 +8,14 @@ void De_Jong_IFSApp::setup()
 	dj = DeJong(a, b, c, d, size);
 	timer.start();
 	framesPassed = 0;
+	ci::app::getElapsedFrames();
+	frameCounterString = "fps : ";
 }
 
 void De_Jong_IFSApp::update()
 {
 	dj.update();
+	updateFPS();
 }
 
 void De_Jong_IFSApp::draw()
@@ -25,10 +28,10 @@ void De_Jong_IFSApp::draw()
 void De_Jong_IFSApp::updateFPS()
 {
 	if (timer.getSeconds() >= 1.0) {
-		fps = ci::app::getElapsedFrames() - framesPassed;
-		framesPassed = ci::app::getElapsedFrames();
+		size_t elapsedFrames = ci::app::getElapsedFrames();
+		fps = elapsedFrames - framesPassed;
+		framesPassed = elapsedFrames;
 		frameCounterString = "fps : " + std::to_string(fps);
-		timer.stop();
 		timer.start();
 	}
 }
