@@ -45,12 +45,12 @@ void De_Jong_IFSApp::setupParams()
 	paramInterface = ci::params::InterfaceGl::create("De Jong IFS Controls", { size / 2,size });
 
 	paramInterface->addParam<ColorA>("color", std::bind(&DeJong::setColor, &dj, _1), std::bind(&DeJong::getColor, &dj));
-	paramInterface->addParam<int>("iterations per frame", std::bind(&DeJong::setIterations, &dj, _1), std::bind(&DeJong::getIterations, &dj)).min(500);
+	paramInterface->addParam<int>("iterations per frame", std::bind(&DeJong::setIterations, &dj, _1), std::bind(&DeJong::getIterations, &dj)).min(500).max(100000).step(500);
 	paramInterface->addSeparator();
-	paramInterface->addParam<float>("A", std::bind(&DeJong::setA, &dj, _1), std::bind(&DeJong::getA, &dj));
-	paramInterface->addParam<float>("B", std::bind(&DeJong::setB, &dj, _1), std::bind(&DeJong::getB, &dj));
-	paramInterface->addParam<float>("C", std::bind(&DeJong::setC, &dj, _1), std::bind(&DeJong::getC, &dj));
-	paramInterface->addParam<float>("D", std::bind(&DeJong::setD, &dj, _1), std::bind(&DeJong::getD, &dj));
+	paramInterface->addParam<float>("A", std::bind(&DeJong::setA, &dj, _1), std::bind(&DeJong::getA, &dj)).min(-M_PI).max(M_PI).precision(4).step(0.001);
+	paramInterface->addParam<float>("B", std::bind(&DeJong::setB, &dj, _1), std::bind(&DeJong::getB, &dj)).min(-M_PI).max(M_PI).precision(4).step(0.001);
+	paramInterface->addParam<float>("C", std::bind(&DeJong::setC, &dj, _1), std::bind(&DeJong::getC, &dj)).min(-M_PI).max(M_PI).precision(4).step(0.001);
+	paramInterface->addParam<float>("D", std::bind(&DeJong::setD, &dj, _1), std::bind(&DeJong::getD, &dj)).min(-M_PI).max(M_PI).precision(4).step(0.001);
 
 
 
