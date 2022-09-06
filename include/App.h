@@ -5,7 +5,7 @@
 #include "cinder/gl/gl.h"
 #include "DeJong.h"
 #include "cinder/Timer.h"
-
+#include "cinder/params/Params.h"
 using namespace ci;
 
 class De_Jong_IFSApp : public app::App
@@ -26,7 +26,9 @@ private:
 	int fps;
 	std::string frameCounterString;
 
+	ci::params::InterfaceGlRef paramInterface;
 
 	void updateFPS();
+	void setupParams();
 };
 

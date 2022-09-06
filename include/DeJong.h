@@ -20,8 +20,8 @@ public:
 	void setC(float input) { c = input; setupFramebuffer(); }
 	void setD(float input) { d = input; setupFramebuffer(); }
 
-	ci::ColorA getColor() { return color; setupFramebuffer(); }
-	void setColor(ci::ColorA input) { color = input; }
+	ci::ColorA getColor() { return color; }
+	void setColor(ci::ColorA input) { color = input; setupFramebuffer(); }
 
 	int getIterations() { return iterationsPerFrame; }
 	void setIterations(int input) { iterationsPerFrame = input; }
